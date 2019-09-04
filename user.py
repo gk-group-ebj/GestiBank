@@ -1,5 +1,3 @@
-
-
 class User:
 
     def __init__(self, mail, password):
@@ -7,15 +5,21 @@ class User:
         self.mail = mail
 
 
-    def login(self, mail, password):
-
-        if(self.mail is temp_mail and self.password is temp_password):
-            print("Success")
+count = 0
+while True:
+    userName = input("Hello! Welcome to FaceSnap! \n\nUsername: ")
+    password = input("Password: ")
+    count += 1
+    if count == 3:
+        #tells user bye
+        print("You didn't give the good login. Bye bye.")
+        #exit
+        break
+    else:
+        if userName == 'elmo' and password == 'blue':
+            #let them in
+            print("Yes! you have successfully logged in.")
+            break #they are in, exit loop
         else:
-            print("Utilisateur non identifié")
-
-
-u1 = User("test@test.com", "test")
-temp_mail = input("Veuillez entrer votre mail : ")
-temp_password = input("Veuillez entrer votre mot de passe : ")
-u1.login("test@test.com", "test")
+            #tell them it is wrong and have them retry, stay in loop
+            print("Too bad! Try again.")
