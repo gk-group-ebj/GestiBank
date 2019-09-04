@@ -47,7 +47,7 @@ class User:
         print("Vous êtes déconnecté")
 
     # Méthode de mise à jour de profil utilisateur
-    def update_profile(self):
+    def update_user_profile(self):
 
         ask_password = input("Voulez-vous modifier votre mot de passe ? \n\noui ou non: ")
         if ask_password == "oui":
@@ -90,5 +90,5 @@ print(u1.global_name)
 
 
 u1.login()
-#u1.update_profile()
+#u1.update_user_profile()
 #print("new mdp : "+u1.password+"\nnew email : "+u1.email+"\nnouveau numéro :"+u1.phone+"\nnew adresse :"+u1.address)
