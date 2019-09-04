@@ -84,11 +84,12 @@ class User:
 
 # Partie test
 
-u1 = User(1, "aa", "bb", "mars","c","d")
+if __name__ == "__main__":
+    u1 = User(1, "aa", "bb", "mars","c","d")
 
-print(u1.global_name)
+    print(u1.global_name)
 
 
-u1.login()
+    u1.login()
 #u1.update_profile()
 #print("new mdp : "+u1.password+"\nnew email : "+u1.email+"\nnouveau numéro :"+u1.phone+"\nnew adresse :"+u1.address)
