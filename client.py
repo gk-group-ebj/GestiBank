@@ -2,23 +2,28 @@
 
 from user import User
 
+
 class Client(User):
 
-    def __init__(self, id, name, surname, address, email, password,b_account_num = None,
-                 children_nb = None, marital_status = None, phone=None, user_type=None):
-        User.__init__(self, id,  surname, name, address, email, password, phone=None, user_type=None)
+    def __init__(self, id, surname, name, address, email, password, b_account_num=None,
+                 children_nb=None, marital_status=None, phone=None, user_type=None):
+        User.__init__(self, id, surname, name, address, email, password, phone=None, user_type=None)
         self.b_account_num = b_account_num
         self.children_nb = children_nb
         self.marital_status = marital_status
 
+    # Méthode affichage attributs de l'objet de type client
+    def __str__(self):
+        return "id:{}, nom:{}, prénon:{}, nbe enfants:{}, statut marital:{}".format(self.id, self.surname, self.name,
+                                                                                    self.children_nb,
+                                                                                    self.marital_status)
 
-   # Méthode mise à jour des informations Client
+    # Méthode mise à jour des informations Client
     def update_client_profile(self):
-
         input_children_nb = input("Entrez le nombre d'enfants à charge \n: ")
-        self_children_nb = input_children_nb
+        self.children_nb = input_children_nb
         input_marital_status = input("Entrez votre situation familiale \n: ")
-        self_marital_status = input_children_nb
+        self.marital_status = input_marital_status
 
     # Méthode demande de transfert bancaire
     def bank_transfer(self):
@@ -37,24 +42,8 @@ class Client(User):
         self.b_account_num = b_account_num
 
 
-
-
-
-
-
-
-
-
-
-update_client_profile()
-bank_tranfer()
-request_cheque_book()
-request_new_bank_account()
-view_bank_statement()
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    c1 = Client(1, "aa", "bb", "mars", "c", "d")
+    print(c1)
+    c1.update_client_profile()
+    print(c1)
