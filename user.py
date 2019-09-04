@@ -78,8 +78,8 @@ class User:
 
 # Partie test
 
-u1 = User(5, "John", "Smith", "la matrice","a","b")
+#u1 = User(5, "John", "Smith", "la matrice","a","b")
 
 #u1.login()
-u1.update_profile()
-print("new mdp : "+u1.password+"\nnew email : "+u1.email+"\nnouveau numéro :"+u1.phone+"\nnew adresse :"+u1.address)
+#u1.update_profile()
+#print("new mdp : "+u1.password+"\nnew email : "+u1.email+"\nnouveau numéro :"+u1.phone+"\nnew adresse :"+u1.address)
