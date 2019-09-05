@@ -1,5 +1,6 @@
-import mysql.connector
 from user import User
+from connection import connect
+import mysql.connector
 from mysql.connector import Error
 
 class Manager(User):
@@ -13,11 +14,44 @@ class Manager(User):
         self.date_end_contract = end_contract
 
 
+u1 = User(1, "aa", "bb", "mars","c","d")
 
-    # def account_creation(self):
+def account_creation():
+    connect()
+
+    insert_stmt = (
+        "INSERT INTO account_client_request(id, surname, name, adress, proof_of_address)"
+        "VALUES (%s, %s, %s, %s, %s)"
+    )
+
+    data = [
+        (1, 'az', 'z', 're', 't'),
+        (2, 'p', 'p', 'p', "p")
+    ]
+
+    cursor = cnx.cursor()
+    cursor.executemany(insert_stmt, data)
+    cnx.close()
+
+# account_creation()
+
+print(u1)
+
+lst = []
+
+for va in u1.__dict__.values():
+    v = va
+    lst.append(v)
+
+print(lst)
+tup = tuple(lst)
+print(tup)
+
+dat = [tup]
+print(dat)
 
 
-
+"""
 try:
     cnx = mysql.connector.connect(host='localhost',
                                   database='gesti_bank',
@@ -47,7 +81,8 @@ else:
     cursor.executemany(insert_stmt, data)
 
 
-    """select_stmt = "SELECT * FROM annuaire WHERE nom= %(emp_nom)s"
-    cursor.execute(select_stmt, { 'emp_nom': 'Doe' })"""
+    select_stmt = "SELECT * FROM annuaire WHERE nom= %(emp_nom)s"
+    cursor.execute(select_stmt, { 'emp_nom': 'Doe' })
 
     cnx.close()
+"""
