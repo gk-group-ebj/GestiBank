@@ -1,5 +1,7 @@
 from mysql.connector import Error, connection
 from user import User
+from connection import connect, cnx
+
 
 class Admin(User):
     def __init__(self, id, name, surname, address, email, password, pro_id, phone, user_type):
@@ -16,30 +18,29 @@ class Admin(User):
         self.email = input("entrer email : ")
         self.password = input("entrer password : ")
         self.phone = input("entrer phone : ")
-        self.user_type = int(input("entrer user_type : "))
+        self.user_type = "Admin"
         self.pro_id = input("entrer matricule : ")
 
-        conn = connection.MySQLConnection(host='localhost',
-                                          database='gesti_bank',
-                                          user='root')
+        connect()
         mySql_insert_query = 'INSERT INTO admin (name, surname, address, email, password, phone, user_type, pro_id)' \
                              '  VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
 
         data = (self.name, self.surname, self.address, self.email, self.password, self.phone, self.user_type, self.pro_id)
-        cursor = conn.cursor()
+        cursor = cnx.cursor()
         result = cursor.execute(mySql_insert_query, data)
-        conn.commit()
-        conn.close()
-    def del_account_admin(selfself):
-        conn = connection.MySQLConnection(host='localhost',
-                                          database='gesti_bank',
-                                          user='root')
-        cursor = conn.cursor()
+        cnx.commit()
+        cnx.close()
+
+    """méthode supression de compte Admin """
+
+    def del_account_admin(self):
+        connect()
+        cursor = cnx.cursor()
         sql_Delete_query = """Delete from admin where id = %s"""
-        de_Id = 2
+        de_Id = input("quel admin sup : ")
         cursor.execute(sql_Delete_query, (de_Id,))
-        conn.commit()
-        conn.close()
+        cnx.commit()
+        cnx.close()
 
 
 
