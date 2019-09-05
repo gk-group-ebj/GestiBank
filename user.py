@@ -1,12 +1,13 @@
 class User:
 
-    def __init__(self, id, name, surname, address, email, password, phone=None, user_type=None):
+    def __init__(self, id,  surname, name, address, email, password, phone=None, user_type=None):
         self.id = id
         self.name = name
         self.surname = surname
         self.address = address
         self.email = email
         self.password = password
+        self.global_name = self.surname + self.name
 
     # Méthode d'identification de l'utilisateur pour connexion et redirection
     def login(self):
@@ -14,8 +15,13 @@ class User:
         count = 0
         while True:
 
-            input_mail = input("Entrez votre identifiant \n\nemail: ")
-            input_password = input("Entrez votre mot de passe \n\nmdp: ")
+
+            input_user_surname = input("Entrez votre nom d'utilisateur (nom) \n: ")
+            input_user_name = input("Entrez votre nom d'utilisateur (prénom) \n: ")
+            input_email = input("Entrez votre email \n: ")
+            input_password = input("Entrez votre mot de passe \n: ")
+            input_global_name = input_user_surname + input_user_name
+            print(input_global_name)
             count += 1
             try_number = 3 - count
 
@@ -25,14 +31,14 @@ class User:
                 # exit
                 break
             else:
-                if input_email is self.email and input_password is self.password:
+                if input_email == self.email and input_password == self.password and input_global_name == self.global_name:
                     # Identification réussie
                     print("Identification réussie")
                     break  # Il faudra faire une redirection avec le user_type
                 else:
-                    # tell them it is wrong and have them retry, stay in loop
+                    # Erreur d'identification, Nouvelle tentative
                     print(
-                        "Email ou mot de passe erroné \nNombre de tentatives restantes : " + str(try_number) + "\nIdentifiez vous")
+                        "Nom d'utilisateur, email ou mot de passe erronés \nNombre de tentatives restantes : " + str(try_number) + "\nIdentifiez vous")
 
     # Méthode de déconnexion
     # Déconnexion par choix ou par timer
@@ -41,7 +47,7 @@ class User:
         print("Vous êtes déconnecté")
 
     # Méthode de mise à jour de profil utilisateur
-    def update_profile(self):
+    def update_user_profile(self):
 
         ask_password = input("Voulez-vous modifier votre mot de passe ? \n\noui ou non: ")
         if ask_password == "oui":
@@ -78,8 +84,12 @@ class User:
 
 # Partie test
 
-#u1 = User(5, "John", "Smith", "la matrice","a","b")
+if __name__ == "__main__":
+    u1 = User(1, "aa", "bb", "mars","c","d")
 
-#u1.login()
-#u1.update_profile()
+    print(u1.global_name)
+
+
+    u1.login()
+#u1.update_user_profile()
 #print("new mdp : "+u1.password+"\nnew email : "+u1.email+"\nnouveau numéro :"+u1.phone+"\nnew adresse :"+u1.address)
