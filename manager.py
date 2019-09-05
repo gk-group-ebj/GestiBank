@@ -20,7 +20,7 @@ def account_creation():
     connect()
 
     insert_stmt = (
-        "INSERT INTO account_client_request(id, surname, name, adress, proof_of_address)"
+        "INSERT INTO account_client_request(id, surname, name, address, proof_of_address)"
         "VALUES (%s, %s, %s, %s, %s)"
     )
 
@@ -68,7 +68,7 @@ except mysql.connector.Error as err:
 else:
 
     insert_stmt = (
-        "INSERT INTO account_client_request(id, surname, name, adress, proof_of_address)"
+        "INSERT INTO account_client_request(id, surname, name, address, proof_of_address)"
         "VALUES (%s, %s, %s, %s, %s)"
     )
 
