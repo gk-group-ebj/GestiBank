@@ -49,28 +49,28 @@ class User:
     # Méthode de mise à jour de profil utilisateur
     def update_user_profile(self):
 
-        ask_password = input("Voulez-vous modifier votre mot de passe ? \n\noui ou non: ")
+        ask_password = input("Voulez-vous modifier votre mot de passe ? \n\nO ou N: ")
         if ask_password == "oui":
             new_password = input("Renseigneze \n\nnouveau mot de passe: ")
             self.password = new_password
         else:
             pass
 
-        ask_email = input("Voulez-vous modifier votre email ? \n\noui ou non: ")
+        ask_email = input("Voulez-vous modifier votre email ? \n\nO ou N: ")
         if ask_email == "oui":
             new_email = input("Renseignez \n\nnouvel email: ")
             self.email = new_email
         else:
             pass
 
-        ask_phone = input("Voulez-vous modifier votre numéro de téléphone ? \n\noui ou non: ")
+        ask_phone = input("Voulez-vous modifier votre numéro de téléphone ? \n\nO ou N: ")
         if ask_phone == "oui":
             new_phone = input("Renseignez \n\nnouveau numéro: ")
             self.phone = new_phone
         else:
             pass
 
-        ask_address = input("Voulez-vous modifier votre adresse ? \n\noui ou non: ")
+        ask_address = input("Voulez-vous modifier votre adresse ? \n\nO ou N: ")
         if ask_address == "oui":
             new_address = input("Renseignez \n\nnouvelle adresse: ")
             self.address = new_address
