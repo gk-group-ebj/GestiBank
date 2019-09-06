@@ -1,5 +1,5 @@
 from user import User
-from connection import connect
+from connection import connect, cnx
 import mysql.connector
 from mysql.connector import Error
 
@@ -14,75 +14,75 @@ class Manager(User):
         self.date_end_contract = end_contract
 
 
-u1 = User(1, "aa", "bb", "mars","c","d")
 
-def account_creation():
+    def account_creation():
+        connect()
+
+
+def login(self):
+    count = 0
+
     connect()
 
-    insert_stmt = (
-        "INSERT INTO account_client_request(id, surname, name, address, proof_of_address)"
-        "VALUES (%s, %s, %s, %s, %s)"
-    )
-
-    data = [
-        (1, 'az', 'z', 're', 't'),
-        (2, 'p', 'p', 'p', "p")
-    ]
-
     cursor = cnx.cursor()
-    cursor.executemany(insert_stmt, data)
+    cursor.execute(select_email)
+
+    #rows_email = cursor.fetchall()
+
+    cursor.execute(select_password)
+
+    # rows_password = cursor.fetchall()
+
+    print(rows_email)
+    print(rows_password)
+
+    while True:
+        print(rows)
+
+        input_email = input("Entrez votre email \n: ")
+        input_password = input("Entrez votre mot de passe \n: ")
+
+        count += 1
+        try_number = 3 - count
+
+        if count == 3:
+            # Identification refusée
+            print("Vos identifiants sont incorrects. Contactez votre agence GestiBank")
+            # exit
+            break
+        else:
+            if input_email == self.email and input_password == self.password and input_global_name == self.global_name:
+                # Identification réussie
+                print("Identification réussie")
+                break  # Il faudra faire une redirection avec le user_type
+            else:
+                # Erreur d'identification, Nouvelle tentative
+                print(
+                "Nom d'utilisateur, email ou mot de passe erronés \nNombre de tentatives restantes : " + str(try_number) + "\nIdentifiez vous")
+
     cnx.close()
 
-# account_creation()
+if __name__ == "__main__":
 
-print(u1)
+    # TODO : Bien implémenter le code connexion dans les classes correspondantes.
+    connect()
 
-lst = []
+    input_email = input("Entrez votre email \n: ")
+    input_password = input("Entrez votre mot de passe \n: ")
+    try :
+        select_email = ("SELECT id FROM manager WHERE password ='"+input_password+"' and email='"+input_email+"'")
 
-for va in u1.__dict__.values():
-    v = va
-    lst.append(v)
-
-print(lst)
-tup = tuple(lst)
-print(tup)
-
-dat = [tup]
-print(dat)
-
-
-"""
-try:
-    cnx = mysql.connector.connect(host='localhost',
-                                  database='gesti_bank',
-                                  user='root',
-                                  password='')
-
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Il y a un problème avec votre user name ou password")
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("La base n’existe pas")
-    else: print(err)
-
-else:
-
-    insert_stmt = (
-        "INSERT INTO account_client_request(id, surname, name, address, proof_of_address)"
-        "VALUES (%s, %s, %s, %s, %s)"
-    )
-
-    data = [
-        (735, 'Sarpi', 'Brice', '636 avenue du Professeur Layton', 'test'),
-        (736, 'Joshua', 'Vegas', '93 avenue Victor Hugo', "test2")
-    ]
-
-    cursor = cnx.cursor()
-    cursor.executemany(insert_stmt, data)
-
-
-    select_stmt = "SELECT * FROM annuaire WHERE nom= %(emp_nom)s"
-    cursor.execute(select_stmt, { 'emp_nom': 'Doe' })
+        #select_password = "SELECT "+ input_password +" FROM manager"
+        print(select_email)
+        cursor = cnx.cursor()
+        mail = cursor.execute(select_email)
+        valeur = cursor.fetchone()
+        print(valeur)
+        if valeur != None:
+            print("connection reussi")
+        else:
+            print("connection rate")
+    except:
+        print("connection ratett")
 
     cnx.close()
-"""
