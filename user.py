@@ -8,15 +8,12 @@ class User:
         self.email = email
         self.password = password
         self.global_name = self.surname + self.name
-        self.phone = phone
-        self.user_type = user_type
 
     # Méthode d'identification de l'utilisateur pour connexion et redirection
     def login(self):
 
         count = 0
         while True:
-
             input_user_surname = input("Entrez votre nom d'utilisateur (nom) \n: ")
             input_user_name = input("Entrez votre nom d'utilisateur (prénom) \n: ")
             input_email = input("Entrez votre email \n: ")
