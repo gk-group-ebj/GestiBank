@@ -1,6 +1,6 @@
 class User:
 
-    def __init__(self, id,  surname, name, address, email, password, phone=None, user_type=None):
+    def __init__(self, id,  surname, name, global_name, address, email, password, phone=None, user_type=None):
         self.id = id
         self.name = name
         self.surname = surname

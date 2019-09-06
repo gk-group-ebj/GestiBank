@@ -6,26 +6,42 @@ from database_operation import *
 
 class Client(User):
 
-    def __init__(self, id, surname, name, address, email, password, b_account_num=None,
-                 children_nb=None, marital_status=None, phone=None, user_type=None):
-        User.__init__(self, id, surname, name, address, email, password, phone=None, user_type=None)
+    def __init__(self, id, surname, name, address, email, password, global_name=None, b_account_num=None,
+                 children_nb=None, marital_status=None, phone=None, user_type=None, beginning_contract=None,
+                 end_contract=None):
+        User.__init__(self, id, surname, name, address, email, password, global_name, phone=None, user_type=None)
         self.b_account_num = b_account_num
         self.children_nb = children_nb
         self.phone = phone
         self.user_type = user_type
         self.marital_status = marital_status
+        self.beginning_contract = beginning_contract
+        self.end_contract = end_contract
 
     # Méthode affichage attributs de l'objet de type client
     def __str__(self):
         return "{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}".format(self.id, self.surname, self.name,
-                                                                 self.address, self.email, self.password,
+                                                                   self.address, self.email, self.password,
                                                                    self.b_account_num, self.children_nb,
                                                                    self.marital_status, self.phone, self.user_type)
 
      # Méthode retourne les valeurs des attributs utiles pour la BD de l'objet de type client
-    def get_utile_attr(self):
-        return (self.id, self.surname, self.name, self.address, self.email, self.password, self.b_account_num,
-                self.children_nb, self.marital_status, self.phone, self.user_type)
+    def get_utile_attr_client(self):
+        return (self.surname, self.name, self.global_name, self.address, self.email, self.password, self.phone,
+                self.b_account_num, self.beginning_contract, self.end_contract, self.marital_status, self.children_nb,
+                self.user_type)
+
+    # Méthode retourne les valeurs des attributs utiles pour la BD de l'objet de type admin
+
+    def get_utile_attr_admin(self):
+        return (self.surname, self.name, self.address, self.email, self.password, self.phone, self.children_nb,
+                self.user_type)
+
+    # Méthode retourne les valeurs des attributs utiles pour la BD de l'objet de type manager
+
+    def get_utile_attr_manager(self):
+        return (self.surname, self.name, self.address, self.email, self.password, self.phone, self.children_nb,
+                self.user_type)
 
 
     # Méthode mise à jour des informations Client
@@ -71,28 +87,25 @@ c = input("entrez prénom : ")
 d = input("entrez adresse : ")
 e = input("entrez email : ")
 f = input("entrez mot de passe : ")
-g = input("entrez n° compte : ")
-h = input("entrez nombre d'enfants : ")
-i = input("entrez statut marital : ")
-j = input("entrez tel : ")
+# g = input("entrez n° compte : ")
+# h = input("entrez nombre d'enfants : ")
+# i = input("entrez statut marital : ")
+# j = input("entrez tel : ")
 k = input("entrez type d'utilisateur : ")
 
 
-c1 = Client(a, b, c, d, e, f, g, h, i, j, k)
+c1 = Client(a, b, c, d, e, f, k)
 
 lst = []
 
 
 
-data = c1.get_utile_attr()
-table_name = "client"
-table_format = "(id, surname, name, address, email, password, b_account_num, children_nb, marital_status, phone, user_type)"
-values_format = "(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-
+data = c1.get_utile_attr_admin()
 dat = [data]
+user_type = k
 print(dat)
 
-create_client_profile(dat, table_name, table_format, values_format)
+create_client_profile(dat, user_type)
 
 
 
