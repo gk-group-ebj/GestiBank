@@ -1,7 +1,7 @@
 # Classe Client, heritage de la classe mère User
 
 from user import User
-from connection import connect, cnx
+from database_operation import *
 
 
 class Client(User):
@@ -24,9 +24,9 @@ class Client(User):
 
      # Méthode retourne les valeurs des attributs utiles pour la BD de l'objet de type client
     def get_utile_attr(self):
-        return self.id, self.surname, self.name, self.address, self.email, self.password, self.b_account_num,
-                self.children_nb, self.marital_status, self.phone, self.user_type
-    #
+        return (self.id, self.surname, self.name, self.address, self.email, self.password, self.b_account_num,
+                self.children_nb, self.marital_status, self.phone, self.user_type)
+
 
     # Méthode mise à jour des informations Client
     def update_client_profile(self):
@@ -36,26 +36,6 @@ class Client(User):
         input_marital_status = input("Entrez votre situation familiale \n: ")
         self.marital_status = input_marital_status
 
-    # Méthode de sauvegarde des infos mises à jour dans la BDD table clients
-    def save_update_client_profile(self, data):
-
-        self.data = data
-        connect()
-
-        insert_stmt = (
-            "INSERT INTO client(id, surname, name, address, email, password, b_account_num, children_nb, marital_status, phone, user_type)"
-            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        )
-
-
-        """= [
-            (1, 'az', 'z', 're', 't'),
-            (2, 'p', 'p', 'p', "p")
-        ]"""
-
-        cursor = cnx.cursor()
-        cursor.executemany(insert_stmt, data)
-        cnx.close()
 
 
 
@@ -105,8 +85,18 @@ lst = []
 
 
 data = c1.get_utile_attr()
+table_name = "client"
+table_format = "(id, surname, name, address, email, password, b_account_num, children_nb, marital_status, phone, user_type)"
+values_format = "(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
 dat = [data]
 print(dat)
 
-c1.save_update_client_profile(dat)
+create_client_profile(dat, table_name, table_format, values_format)
+
+
+
+"""client(id, surname, name, address, email, password, b_account_num, children_nb, marital_status, phone, user_type)"
+                    "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+
+"""table_name, table_format, values_format"""
