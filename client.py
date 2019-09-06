@@ -31,17 +31,7 @@ class Client(User):
                 self.b_account_num, self.beginning_contract, self.end_contract, self.marital_status, self.children_nb,
                 self.user_type)
 
-    # Méthode retourne les valeurs des attributs utiles pour la BD de l'objet de type admin
 
-    def get_utile_attr_admin(self):
-        return (self.surname, self.name, self.address, self.email, self.password, self.phone, self.children_nb,
-                self.user_type)
-
-    # Méthode retourne les valeurs des attributs utiles pour la BD de l'objet de type manager
-
-    def get_utile_attr_manager(self):
-        return (self.surname, self.name, self.address, self.email, self.password, self.phone, self.children_nb,
-                self.user_type)
 
 
     # Méthode mise à jour des informations Client

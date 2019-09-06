@@ -1,17 +1,31 @@
-from connection import connect, cnx
-def creation_account_admin():
-    connect()
-    mySql_insert_query = 'INSERT INTO admin (name, surname, address, email, password, phone, user_type, pro_id)' \
-                         '  VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
-    with open("C:/Users/kardaoui/Desktop/fichier d'entrée/clients.txt", "r") as f:
-        for line in f.readlines():
-            admin = line
-            mots = str.split(admin, ", ")
+from database_operation import *
+
+def import_file(path):
+    path = "C:/Users/kardaoui/Desktop/fichier d'entrée/clients.txt"
+    lst = []
+    with open(path, "r") as f:
+        for l in f.readlines():
+            mots = str.split(l, ", ")
             mots[-1] = mots[-1][:-1]
+            tup=tuple(mots)
+            lst.append(tup)
 
-            cursor = cnx.cursor()
-            result = cursor.execute(mySql_insert_query, mots)
-    cnx.commit()
-    cnx.close()
+    return(lst)
 
-creation_account_admin()
+
+if __name__ == "__main__":
+    #path = "C:/Users/kardaoui/Desktop/fichier d'entrée/manager.txt"
+    #data = import_file(path)
+    #create_client_profile(data, "manager")
+    path = "C:/Users/kardaoui/Desktop/fichier d'entrée/clients.txt"
+    data = import_file(path)
+    create_client_profile(data, "client")
+
+
+
+
+
+
+
+
+
